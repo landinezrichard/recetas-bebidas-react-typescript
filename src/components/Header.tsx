@@ -1,13 +1,26 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useAppStore } from "../stores/useAppStore";
 
 export default function Header() {
   const { pathname } = useLocation();
 
+  const fetchCategories = useAppStore((state) => state.fetchCategories);
+
+  const categories = useAppStore((state) => state.categories);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   const isHome = useMemo(() => pathname === "/", [pathname]);
 
   return (
-    <header className={isHome ? 'bg-[url(/bg.jpg)] bg-center bg-cover' : 'bg-slate-800'}>
+    <header
+      className={
+        isHome ? "bg-[url(/bg.jpg)] bg-center bg-cover" : "bg-slate-800"
+      }
+    >
       <div className="container mx-auto px-5 py-16">
         <div className="flex justify-between items-center">
           <div>
@@ -58,17 +71,25 @@ export default function Header() {
 
             <div className="space-y-4">
               <label
-                htmlFor="categoria"
+                htmlFor="category"
                 className="block text-white uppercase font-extrabold text-lg"
               >
                 Categoría
               </label>
               <select
-                id="categoria"
-                name="categoria"
+                id="category"
+                name="category"
                 className="p-3 w-full rounded-lg focus:outline-none bg-white"
               >
                 <option value="">-- Selecciona una categoría --</option>
+                {categories.drinks.map((category) => (
+                  <option
+                    key={category.strCategory}
+                    value={category.strCategory}
+                  >
+                    {category.strCategory}
+                  </option>
+                ))}
               </select>
             </div>
 
