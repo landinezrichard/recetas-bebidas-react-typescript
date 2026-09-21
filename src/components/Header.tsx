@@ -13,17 +13,33 @@ export default function Header() {
 
   const fetchCategories = useAppStore((state) => state.fetchCategories);
   const categories = useAppStore((state) => state.categories);
+  const searchRecipes = useAppStore((state) => state.searchRecipes);
 
   useEffect(() => {
     fetchCategories();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     setSearchFilters({
       ...searchFilters,
       [e.target.name]: e.target.value,
     });
-  }
+  };
+
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Validar
+    if(Object.values(searchFilters).includes("")) {
+      console.log("Todos los campos son obligatorios");
+      return;
+    }
+
+    // Consultar las recetas
+    searchRecipes(searchFilters);
+  };
 
   return (
     <header
@@ -62,7 +78,10 @@ export default function Header() {
         </div>
 
         {isHome && (
-          <form className="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6">
+          <form
+            className="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6"
+            onSubmit={handleSubmit}
+          >
             <div className="space-y-4">
               <label
                 htmlFor="ingredient"
