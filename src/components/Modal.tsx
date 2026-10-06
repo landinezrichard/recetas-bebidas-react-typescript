@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -5,10 +6,29 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useAppStore } from "../stores/useAppStore";
+import type { Recipe } from "../types";
 
 export default function MyModal() {
   const modal = useAppStore((state) => state.modal);
   const closeModal = useAppStore((state) => state.closeModal);
+
+  const selectedRecipe = useAppStore((state) => state.selectedRecipe);
+
+  const renderingIngredients = () => {
+    const ingredients: JSX.Element[] = [];
+    for (let i = 1; i <= 15; i++) {
+      const ingredient = selectedRecipe[`strIngredient${i}` as keyof Recipe];
+      const measure = selectedRecipe[`strMeasure${i}` as keyof Recipe];
+      if (ingredient && measure) {
+        ingredients.push(
+          <li key={i} className="text-lg font-normal">
+            {ingredient} - {measure}
+          </li>,
+        );
+      }
+    }
+    return ingredients;
+  };
 
   return (
     <>
@@ -26,26 +46,39 @@ export default function MyModal() {
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <DialogPanel
             transition
-            className="w-full max-w-md rounded-xl bg-white px-4 pt-5 pb-4 text-left shadow-xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+            className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-xl bg-white px-4 pt-5 pb-4 text-left shadow-xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
           >
             <DialogTitle
               as="h3"
               className="text-gray-900 text-4xl font-extrabold my-5 text-center"
             >
-              Titulo Aquí
+              {selectedRecipe.strDrink}
             </DialogTitle>
+
+            <img
+              src={selectedRecipe.strDrinkThumb}
+              alt={`Imagen de ${selectedRecipe.strDrink}`}
+              className="mx-auto w-96"
+            />
+
             <DialogTitle
               as="h3"
               className="text-gray-900 text-2xl font-extrabold my-5"
             >
               Ingredientes y Cantidades
             </DialogTitle>
+
+            <ul className="list-disc list-inside">
+              {renderingIngredients()}
+            </ul>
+
             <DialogTitle
               as="h3"
               className="text-gray-900 text-2xl font-extrabold my-5"
             >
               Instrucciones
             </DialogTitle>
+            <p className="text-lg">{selectedRecipe.strInstructions}</p>
             {/* <div className="mt-4">
                 <Button
                   className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
@@ -53,7 +86,7 @@ export default function MyModal() {
                 >
                   Got it, thanks!
                 </Button>
-              </div> */}
+            </div> */}
           </DialogPanel>
         </div>
       </Dialog>
