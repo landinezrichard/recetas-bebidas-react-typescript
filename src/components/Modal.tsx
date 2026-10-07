@@ -68,9 +68,7 @@ export default function MyModal() {
               Ingredientes y Cantidades
             </DialogTitle>
 
-            <ul className="list-disc list-inside">
-              {renderingIngredients()}
-            </ul>
+            <ul className="list-disc list-inside">{renderingIngredients()}</ul>
 
             <DialogTitle
               as="h3"
@@ -78,15 +76,26 @@ export default function MyModal() {
             >
               Instrucciones
             </DialogTitle>
+
             <p className="text-lg">{selectedRecipe.strInstructions}</p>
-            {/* <div className="mt-4">
-                <Button
-                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
-                  onClick={close}
-                >
-                  Got it, thanks!
-                </Button>
-            </div> */}
+
+            <div className="mt-5 flex justify-between gap-4">
+              <button
+                type="button"
+                className="w-full rounded bg-gray-600 cursor-pointer p-3 font-bold uppercase text-white shadow hover:bg-gray-500"
+                onClick={closeModal}
+              >
+                Cerrar
+              </button>
+
+              <button
+                type="button"
+                className="w-full rounded bg-orange-600 cursor-pointer p-3 font-bold uppercase text-white shadow hover:bg-orange-500"
+                
+              >
+                Agregar a Favoritos
+              </button>
+            </div>
           </DialogPanel>
         </div>
       </Dialog>
