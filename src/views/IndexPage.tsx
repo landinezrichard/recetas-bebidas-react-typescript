@@ -19,7 +19,7 @@ export default function IndexPage() {
         </div>
       ) : (
         <p className="my-10 text-center text-2xl">
-          No hay resultaddos aún, utiliza el formulario para buscar recetas.
+          No hay resultados aún, utiliza el formulario para buscar recetas.
         </p>
       )}
     </div>
