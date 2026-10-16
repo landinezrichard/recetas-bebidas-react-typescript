@@ -90,7 +90,7 @@ pnpm run build
 | [tailwindcss](https://www.npmjs.com/package/tailwindcss) | Un framework CSS centrado en la utilidad para crear rápidamente interfaces de usuario personalizadas. |
 ## Screenshots 📷​
 
-![App Screenshot](./preview-1.jpg) *Index Page*
-![App Screenshot](./preview-2.jpg) *Index Page | Recipes*
-![App Screenshot](./preview-3.jpg) *Recipe Detail - Modal*
-![App Screenshot](./preview-4.jpg) *Favorites Page*
+![App Screenshot](./previews/preview-1.jpg) *Index Page*
+![App Screenshot](./previews/preview-2.jpg) *Index Page | Recipes*
+![App Screenshot](./previews/preview-3.jpg) *Recipe Detail - Modal*
+![App Screenshot](./previews/preview-4.jpg) *Favorites Page*
