@@ -1,6 +1,6 @@
 # Recetas Bebidas - React - Typescript 🍾​🍷​🍸​🍹​🍺​🥂​🍻​​
 
-Consulta recetas de bebidas alcohólicas, dado un ingrediente y seleccionando una categoria.
+Consulta recetas de bebidas alcohólicas, dado un ingrediente y seleccionando una categoría.
 
 Hecho con React - TypeScript, con las siguientes caracteristicas:
 
@@ -13,6 +13,7 @@ Hecho con React - TypeScript, con las siguientes caracteristicas:
 - Utiliza "headlessui" para componentes de Modal.
 - Usa "heroicons".
 - Performance de archivos JS con "lazy" y "Suspense".
+- Usa "localStorage" para conservar los favoritos.
 
 
 ## API Reference 🧩​
