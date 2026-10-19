@@ -1,17 +1,20 @@
 import { useAppStore } from "../stores/useAppStore";
 
 export default function GenerateAI() {
-
   const showNotification = useAppStore((state) => state.showNotification);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
+  const generateRecipe = useAppStore((state) => state.generateRecipe);
+  const recipe = useAppStore((state) => state.recipe);
+  const isGenerating = useAppStore((state) => state.isGenerating);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Obtener formulario
     const form = new FormData(e.currentTarget);
     const prompt = form.get("prompt") as string;
 
-    if(prompt.trim() === ""){
+    if (prompt.trim() === "") {
       showNotification({
         text: "La búsqueda no puede estar vacía",
         error: true,
@@ -19,6 +22,7 @@ export default function GenerateAI() {
       return;
     }
 
+    generateRecipe(prompt);
   };
 
   return (
@@ -37,7 +41,8 @@ export default function GenerateAI() {
             <button
               type="submit"
               aria-label="Enviar"
-              className={`cursor-pointer absolute top-1/2 right-5 transform -translate-x-1/2 -translate-y-1/2`}
+              className={`cursor-pointer absolute top-1/2 right-5 transform -translate-x-1/2 -translate-y-1/2 ${isGenerating ? "opacity-50 pointer-events-none cursor-not-allowed" : ""}`}
+              disabled={isGenerating}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +62,13 @@ export default function GenerateAI() {
           </div>
         </form>
 
-        <div className="py-10 whitespace-pre-wrap"></div>
+        {isGenerating && (
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded-full bg-orange-500 animate-pulse"></div>
+            <span>Generando receta...</span>
+          </div>
+        )}
+        <div className="py-10 whitespace-pre-wrap">{recipe}</div>
       </div>
     </>
   );
