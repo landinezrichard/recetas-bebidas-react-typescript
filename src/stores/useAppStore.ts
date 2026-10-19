@@ -9,13 +9,15 @@ import {
   type NotificationSliceType,
   createNotificationSlice,
 } from "./notificationSlice";
+import { type AISliceType, createAISlice } from "./aiSlice";
 
 export const useAppStore = create<
-  RecipesSliceType & FavoritesSliceType & NotificationSliceType
+  RecipesSliceType & FavoritesSliceType & NotificationSliceType & AISliceType
 >()(
   devtools((...a) => ({
     ...createRecipesSlice(...a),
     ...createFavoritesSlice(...a),
     ...createNotificationSlice(...a),
+    ...createAISlice(...a),
   })),
 );
