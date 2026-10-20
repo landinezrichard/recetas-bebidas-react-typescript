@@ -14,6 +14,7 @@ Hecho con React - TypeScript, con las siguientes caracteristicas:
 - Usa "heroicons".
 - Performance de archivos JS con "lazy" y "Suspense".
 - Usa "localStorage" para conservar los favoritos.
+- New: nueva página para generar recetas con IA.
 
 
 ## API Reference 🧩​
@@ -48,6 +49,14 @@ Obtener el detalle de la receta por un Id.
   https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}
 ```
 
+#### Generar receta con IA:
+
+Ir a [Openrouter](https://openrouter.ai/) registrarse y crear una API KEY (Copiarla).
+
+Nota: Si al momento de hacer una consulta, el modelo falla, cambiarlo en el archivo "src\services\AIService.ts".
+
+Para cambiar la personalidad del agente de IA, para que la respuesta sea diferente [Documentación](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text).
+
 ## Run Server 🏃​
 
 Para **desarrollo**: 
@@ -58,7 +67,11 @@ Para **desarrollo**:
 pnpm i
 ```
 
-2) Correr servidor con:
+2) Crear en la raíz un archivo "**.env**", con la siguiente variable de entorno:
+
+`VITE_OPENROUTER_KEY=api-key-de-openrouter`
+
+3) Correr servidor con:
 
 ```bash
 pnpm run dev
@@ -67,7 +80,7 @@ ___
 
 Para **producción**: 
 
-1) Repetir paso No.1 de desarrollo.
+1) Repetir pasos No.1 y No.2 de desarrollo.
 
 2) Generar carpeta "dist" con:
 
@@ -88,6 +101,10 @@ pnpm run build
 | [zustand](https://www.npmjs.com/package/zustand) | Una solución de gestión de estado pequeña, rápida y escalable que utiliza principios Flux simplificados. |
 | [react-router-dom](https://www.npmjs.com/package/react-router-dom) | React Router es un enrutador multiestrategia para React. Puedes usarlo como un framework de React o como una biblioteca con tu propia arquitectura. |
 | [tailwindcss](https://www.npmjs.com/package/tailwindcss) | Un framework CSS centrado en la utilidad para crear rápidamente interfaces de usuario personalizadas. |
+| [tailwindcss](https://www.npmjs.com/package/tailwindcss) | Un framework CSS centrado en la utilidad para crear rápidamente interfaces de usuario personalizadas. |
+| [@openrouter/ai-sdk-provider](https://www.npmjs.com/package/@openrouter/ai-sdk-provider) | El proveedor OpenRouter para el SDK de IA de Vercel ofrece acceso a más de 300 modelos de lenguaje complejos en las API de chat y autocompletado de OpenRouter. |
+| [ai](https://www.npmjs.com/package/ai) | El SDK de IA es un conjunto de herramientas TypeScript independiente del proveedor, diseñado para ayudarte a crear aplicaciones y agentes con inteligencia artificial utilizando marcos de interfaz de usuario populares como Next.js, React, Svelte, Vue, Angular y entornos de ejecución como Node.js. |
+
 ## Screenshots 📷​
 
 ![App Screenshot](./previews/preview-1.jpg) *Index Page*
